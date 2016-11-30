@@ -140,6 +140,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource.Play();
         }
 
+		public bool play_footsteps = false;
 
         private void ProgressStepCycle(float speed)
         {
@@ -156,7 +157,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_NextStep = m_StepCycle + m_StepInterval;
 
-            PlayFootStepAudio();
+			if (play_footsteps) PlayFootStepAudio ();
         }
 
 
