@@ -256,5 +256,28 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
-    }
+
+	//item pick up
+		void OnTriggerStay(Collider other){
+			if (other.gameObject.tag == "Item") {
+				
+				//item glows when over it
+				Renderer rend = other.gameObject.GetComponent<Renderer>();
+				Material mat = rend.material;
+				mat.SetColor("_EmissionColor", Color.white);
+
+				if (Input.GetMouseButtonDown (0)) {
+					Destroy (other.gameObject);
+					// add more stuff here with UI/Canvass
+				}
+			}
+		}
+		void OnTriggerExit(Collider other){
+			if (other.CompareTag("Item")){
+				Renderer rend = other.gameObject.GetComponent<Renderer>();
+				Material mat = rend.material;
+				mat.SetColor ("_EmissionColor", Color.black);
+			}
+		}
+	}
 }
