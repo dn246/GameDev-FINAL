@@ -13,7 +13,7 @@ public class trigger_collider : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		score_text.text = "Score: 0";
+		score_text.text = "Monetary Value: 0";
 		scorecount = 0;
 
 	}
@@ -28,7 +28,7 @@ public class trigger_collider : MonoBehaviour {
 
 				float item_score = (other.gameObject.GetComponent<Item_trait> ()).item_value;
 				scorecount += item_score;
-				score_text.text = "Score: " + scorecount;
+				score_text.text = "Monetary Value: " + scorecount;
 
 				Destroy (other.gameObject);
 				// add more stuff here with UI/Canvass
