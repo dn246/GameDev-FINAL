@@ -40,7 +40,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
-        private AudioSource m_AudioSource;
+
+		//changes
+
+		public AudioClip[] SplashSounds;
+	
+		public AudioSource m_AudioSource;
+		public AudioSource NewAudioSource;
+		private bool OnPuddle = false;
+		public bool play_footsteps = false;
+		public GameObject AudioMang;
+		private Audio_Manager fuck;
+
+
 
         // Use this for initialization
         private void Start()
@@ -53,9 +65,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
-            m_AudioSource = GetComponent<AudioSource>();
+//            m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-        }
+
+			//changes
+			AudioMang = GameObject.Find ("Scene Audio");
+			fuck = AudioMang.GetComponent<Audio_Manager>();
+		}
 
 
         // Update is called once per frame
@@ -140,7 +156,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource.Play();
         }
 
-		public bool play_footsteps = false;
 
         private void ProgressStepCycle(float speed)
         {
@@ -157,7 +172,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_NextStep = m_StepCycle + m_StepInterval;
 
-			if (play_footsteps) PlayFootStepAudio ();
+			if (play_footsteps) { PlayFootStepAudio (); }
+			if (OnPuddle) {	playspash (); }
+
         }
 
 
@@ -176,6 +193,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
         }
+
 
 
         private void UpdateCameraPosition(float speed)
@@ -256,28 +274,45 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+			
 
-	//item pick up
-		void OnTriggerStay(Collider other){
-			if (other.gameObject.tag == "Item") {
-				
-				//item glows when over it
-				Renderer rend = other.gameObject.GetComponent<Renderer>();
-				Material mat = rend.material;
-				mat.SetColor("_EmissionColor", Color.white);
+//
 
-				if (Input.GetMouseButtonDown (0)) {
-					Destroy (other.gameObject);
-					// add more stuff here with UI/Canvass
-				}
+		private void playspash()
+		{
+			if (!m_CharacterController.isGrounded)
+			{
+				return;
 			}
+
+			int n = Random.Range(1, SplashSounds.Length);
+			NewAudioSource.clip = SplashSounds[n];
+			NewAudioSource.PlayOneShot(NewAudioSource.clip);
+			SplashSounds[n] = SplashSounds[0];
+			SplashSounds[0] = NewAudioSource.clip;
+		}
+
+		void OnTriggerStay(Collider other){
+
+			//splash sounds
+			if (other.gameObject.tag == "Puddle") {
+				OnPuddle = true;
+			}
+
+			if (other.gameObject.tag == "Room") {
+				fuck.FootstepReverbOff ();
+			}
+
 		}
 		void OnTriggerExit(Collider other){
-			if (other.CompareTag("Item")){
-				Renderer rend = other.gameObject.GetComponent<Renderer>();
-				Material mat = rend.material;
-				mat.SetColor ("_EmissionColor", Color.black);
+
+			if (other.CompareTag ("Puddle")) {
+				OnPuddle = false; 
 			}
+			if (other.gameObject.tag == "Room") {
+				fuck.FootstepReverbOn ();
+			}
+
 		}
 	}
 }
