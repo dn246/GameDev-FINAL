@@ -365,23 +365,23 @@ namespace UnityStandardAssets.ImageEffects
 				}
 			}
 		}
+		void OnTriggerEnter(Collider other){
 
-			void OnTriggerEnter(Collider other){
-				if (other.gameObject.tag == "Item") {
-
-					Behaviour halo = (Behaviour)other.GetComponent ("Halo");
-
-					halo.enabled = true; 
-				}
+			Behaviour[] halos = other. GetComponentsInChildren<Behaviour> ();
+			foreach( Behaviour halo in halos)
+			{
+				halo.enabled = true; 
 			}
-			void OnTriggerExit(Collider other){
-				if (other.gameObject.tag == "Item") {
+		}
+		void OnTriggerExit(Collider other){
+			if (other.gameObject.tag == "Item") {
 
-					Behaviour halo = (Behaviour)other.GetComponent ("Halo");
-
+				Behaviour[] halos = other. GetComponentsInChildren<Behaviour> ();
+				foreach( Behaviour halo in halos)
+				{
 					halo.enabled = false; 
 				}
 			}
-
 		}
     }
+}

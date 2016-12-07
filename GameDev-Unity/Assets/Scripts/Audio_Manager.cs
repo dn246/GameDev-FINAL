@@ -8,6 +8,21 @@ public class Audio_Manager : MonoBehaviour {
 	public float snapshotblend = 0.5f;
 
 
+	public AudioSource[] atmosphere;
+
+
+
+	void start(){
+		(atmosphere [0]).PlayDelayed (1);
+		(atmosphere [1]).PlayDelayed (5);
+	
+	}
+
+	void update(){
+		Debug.Log ( (atmosphere [0]).isPlaying );
+	
+	}
+
 
 	public void FootstepReverbOn(){
 		(AudioSnapshots[0]).TransitionTo (snapshotblend);
