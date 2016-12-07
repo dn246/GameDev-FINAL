@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3a675ac5c01be3e42a54fe95b17fb0da
+timeCreated: 1481103173
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - intro_text: {fileID: 1000011987962714, guid: 424541682a94b3940b5a1c075ef720bb,
+      type: 2}
+  - question_text: {fileID: 1000012364512908, guid: b52d218e230268044922e823975150b6,
+      type: 2}
+  - musket_text: {fileID: 1000012275720444, guid: 5f46ba84722814b4183fee882e9a65a1,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
