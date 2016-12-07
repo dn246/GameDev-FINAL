@@ -11,6 +11,7 @@ public class UI_collision_script : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision){
 		if (collision.gameObject.tag == "Player") {
+			Debug.Log ("HI");
 			Destroy(gameObject);
 
 		}

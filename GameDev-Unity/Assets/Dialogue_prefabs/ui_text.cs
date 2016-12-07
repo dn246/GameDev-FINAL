@@ -16,7 +16,7 @@ public class ui_text : MonoBehaviour {
 		
 	}
 
-	void OnTriggerStay(Collider collision){
+	void OnTriggerEnter(Collider collision){
 		if (collision.gameObject.tag == "Dialogue_1") {
 			Debug.Log ("hi");
 		//	Instantiate (intro_text, gameObject.transform.position, Quaternion.identity);
@@ -42,6 +42,10 @@ public class ui_text : MonoBehaviour {
 		if (collision.gameObject.tag == "Dialogue_6") {
 			//	Instantiate (musket_text, gameObject.transform.position, Quaternion.identity);
 			Instantiate (texts [5], gameObject.transform.position, Quaternion.identity);
+		}
+		if (collision.gameObject.tag == "Dialogue_7") {
+			//	Instantiate (musket_text, gameObject.transform.position, Quaternion.identity);
+			Instantiate (texts [6], gameObject.transform.position, Quaternion.identity);
 		}
 	}
 	

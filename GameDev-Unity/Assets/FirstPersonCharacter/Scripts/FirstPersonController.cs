@@ -41,6 +41,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
 
+		public float timer = 60.0f;
+		public GameObject timer_text;
 		//changes
 
 		public AudioClip[] SplashSounds;
@@ -72,17 +74,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			//changes
 			AudioMang = GameObject.Find ("Scene Audio");
 			fuck = AudioMang.GetComponent<Audio_Manager>();
-
-
-
-			public float timer = 60.0f;
-			public float timer = 60.0f;
-			public GameObject timer_text;
-
-			timer -= Time.deltaTime;
-			if (timer <= 0){
-				Instantiate (timer_text, gameObject.transform.position, Quaternion.identity);
-				timer_text = 60.0f;
 		}
 
 
@@ -109,6 +100,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+			timer -= Time.deltaTime;
+			if (timer <= 0){
+				Instantiate (timer_text, gameObject.transform.position, Quaternion.identity);
+				timer = 60.0f;
+			}
         }
 
 
