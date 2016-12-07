@@ -1,11 +1,19 @@
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 
 namespace UnityStandardAssets.ImageEffects
 {
     [ExecuteInEditMode]
     [RequireComponent (typeof(Camera))]
     [AddComponentMenu ("Image Effects/Bloom and Glow/Bloom")]
+
+
+
+
+
     public class Bloom : PostEffectsBase
     {
         public enum LensFlareStyle
@@ -354,12 +362,15 @@ namespace UnityStandardAssets.ImageEffects
                 Graphics.Blit (from, to);
             }
         }
-
+		/*
 		void OnTriggerStay(Collider other){
 			if (other.gameObject.tag == "Item") {
 
 
 				if (Input.GetMouseButtonDown (0)) {
+
+					float item_score = other.gameObject.GetComponent<Item_trait> ();
+
 					Destroy (other.gameObject);
 					// add more stuff here with UI/Canvass
 				}
@@ -375,13 +386,12 @@ namespace UnityStandardAssets.ImageEffects
 		}
 		void OnTriggerExit(Collider other){
 			if (other.gameObject.tag == "Item") {
-
 				Behaviour[] halos = other. GetComponentsInChildren<Behaviour> ();
 				foreach( Behaviour halo in halos)
 				{
 					halo.enabled = false; 
 				}
 			}
-		}
-    }
+		}*/
+	}
 }
