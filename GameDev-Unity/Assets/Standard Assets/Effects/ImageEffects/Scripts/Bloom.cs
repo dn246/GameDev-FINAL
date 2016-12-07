@@ -354,5 +354,34 @@ namespace UnityStandardAssets.ImageEffects
                 Graphics.Blit (from, to);
             }
         }
+
+		void OnTriggerStay(Collider other){
+			if (other.gameObject.tag == "Item") {
+
+
+				if (Input.GetMouseButtonDown (0)) {
+					Destroy (other.gameObject);
+					// add more stuff here with UI/Canvass
+				}
+			}
+		}
+
+			void OnTriggerEnter(Collider other){
+				if (other.gameObject.tag == "Item") {
+
+					Behaviour halo = (Behaviour)other.GetComponent ("Halo");
+
+					halo.enabled = true; 
+				}
+			}
+			void OnTriggerExit(Collider other){
+				if (other.gameObject.tag == "Item") {
+
+					Behaviour halo = (Behaviour)other.GetComponent ("Halo");
+
+					halo.enabled = false; 
+				}
+			}
+
+		}
     }
-}
